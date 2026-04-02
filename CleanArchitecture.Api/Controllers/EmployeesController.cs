@@ -1,14 +1,20 @@
 ﻿using CleanArchitecture.Application.Commands;
 using CleanArchitecture.Application.Queries;
 using CleanArchitecture.Core.Entities;
+using CleanArchitecture.Core.Options;
 using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Options;
 
 namespace CleanArchitecture.Api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    
+    //IOptions is an example here to read value from appsettings.json file, you can inject any other service as well
+    //public class EmployeesController(ISender sender, IOptions<ConnectionStringOptions> options) : ControllerBase
+
     public class EmployeesController(ISender sender) : ControllerBase
     {
         [HttpPost("AddEmployee")]
@@ -23,6 +29,9 @@ namespace CleanArchitecture.Api.Controllers
         {
             var result = await sender.Send(new GetAllEmployeesQuery());
             return Ok(result);
+
+            //IOptions is an example here to read value from appsettings.json 
+            //return Ok(options.Value.DefaultConnection);
         }
 
         [HttpGet("GetEmployeeById/{employeeId}")]

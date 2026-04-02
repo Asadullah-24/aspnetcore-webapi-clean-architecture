@@ -1,4 +1,5 @@
 using CleanArchitecture.Api;
+using CleanArchitecture.Core.Options;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -9,7 +10,9 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-builder.Services.AddAppDI();
+//builder.Services.Configure<ConnectionStringOptions>(builder.Configuration.GetSection(ConnectionStringOptions.SectionName));
+
+builder.Services.AddAppDI(builder.Configuration);
 
 var app = builder.Build();
 
