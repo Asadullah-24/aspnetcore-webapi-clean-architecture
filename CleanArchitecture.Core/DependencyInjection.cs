@@ -9,6 +9,8 @@ namespace CleanArchitecture.Core
         public static IServiceCollection AddCoreDI(this IServiceCollection services, IConfiguration configuration)
         {
             services.Configure<ConnectionStringOptions>(configuration.GetSection(ConnectionStringOptions.SectionName));
+            services.Configure<TypicodeOptions>(configuration.GetSection(TypicodeOptions.SectionName));
+            services.Configure<JsonDummyDataOptions>(configuration.GetSection(JsonDummyDataOptions.SectionName));
             return services;
         }
 
